@@ -3,7 +3,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/light_off"
+    android:background="@drawable/light_on"
     android:weightSum="1"
     android:id="@+id/rootContainer">
 
@@ -11,13 +11,13 @@
         android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:text="New ToggleButton"
-        android:id="@+id/toggleButton"
+        android:id="@+id/onButton"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/toggle_switch"
+        android:background="@drawable/on_button"
         android:textOff=""
         android:textOn=""
-        android:onClick="goToOnScene"
         android:layout_weight="0.07"
+        android:onClick="goToOffScene"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -39,6 +39,7 @@
         android:visibility="invisible"
 
         />
+
 
 
 </RelativeLayout>

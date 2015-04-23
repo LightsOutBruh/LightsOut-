@@ -3,23 +3,35 @@ package com.cs499.dvluong.lightsout;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import android.transition.Transition;
+import android.transition.Scene;
+import android.transition.TransitionManager;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 public class OnOffUI extends Activity {
+    Button toggleButton;
     Button onButton;
     Button offButton;
-    MediaPlayer onClick;
-    MediaPlayer offClick;
+    MediaPlayer clickSound;
+    ViewGroup rootContainer;
+    Scene sceneOff;
+    Scene sceneOn;
+    Transition transitionManager;
+    RelativeLayout layout;
+    ImageView image;
+    boolean on = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,51 +39,34 @@ public class OnOffUI extends Activity {
         setContentView(R.layout.activity_on_off_ui);
 
         // button sound
-        onClick = MediaPlayer.create(this, R.raw.button_click);
-
-        onButton = (Button) findViewById(R.id.onButton);
-
-        onButton.setOnClickListener(new View.OnClickListener() {
+        clickSound = MediaPlayer.create(this, R.raw.button_click);
+        rootContainer = (ViewGroup) findViewById(R.id.rootContainer);
+        transitionManager = TransitionInflater.from(this).inflateTransition(R.transition.transition);
+        sceneOff = Scene.getSceneForLayout(rootContainer, R.layout.activity_on_off_ui, this);
+        sceneOn = Scene.getSceneForLayout(rootContainer, R.layout.transition_file, this);
+        toggleButton = (Button) findViewById(R.id.toggleButton);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(OnOffUI.this, "Light's On!", Toast.LENGTH_SHORT).show();
+                clickSound.start();
+                sceneOn.enter();
 
-                onClick.start();
-                new AlertDialog.Builder(OnOffUI.this)
-                        .setTitle("Lights On!")
-                        .setMessage("You have turned the lights on!")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // select ok exits dialog
-                            }
-                        }).show();
             }
         });
 
-        // button sound
-        offClick = MediaPlayer.create(this, R.raw.button_click);
 
-        // button animation
+    }
 
+    public void goToOnScene(View view){
+        clickSound = MediaPlayer.create(this, R.raw.button_click);
+        TransitionManager.go(sceneOn);
+        clickSound.start();
+    }
 
-        offButton = (Button) findViewById(R.id.offButton);
-        offButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(OnOffUI.this, "Light's Off!", Toast.LENGTH_SHORT).show();
-
-                offClick.start();
-
-                new AlertDialog.Builder(OnOffUI.this)
-                        .setTitle("Lights Off!")
-                        .setMessage("You have turned the lights off!")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // select ok exits dialog
-                            }
-                        }).show();
-            }
-        });
+    public void goToOffScene(View view){
+        clickSound = MediaPlayer.create(this, R.raw.button_click);
+        TransitionManager.go(sceneOff);
+        clickSound.start();
     }
 
     @Override
