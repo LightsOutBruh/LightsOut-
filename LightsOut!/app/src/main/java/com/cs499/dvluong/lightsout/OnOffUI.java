@@ -22,16 +22,8 @@ import android.widget.Toast;
 
 public class OnOffUI extends Activity {
     Button toggleButton;
-    Button onButton;
-    Button offButton;
     MediaPlayer clickSound;
-    ViewGroup rootContainer;
-    Scene sceneOff;
-    Scene sceneOn;
-    Transition transitionManager;
-    RelativeLayout layout;
     ImageView image;
-    boolean on = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +32,22 @@ public class OnOffUI extends Activity {
 
         // button sound
         clickSound = MediaPlayer.create(this, R.raw.button_click);
-        rootContainer = (ViewGroup) findViewById(R.id.rootContainer);
-        transitionManager = TransitionInflater.from(this).inflateTransition(R.transition.transition);
-        sceneOff = Scene.getSceneForLayout(rootContainer, R.layout.activity_on_off_ui, this);
-        sceneOn = Scene.getSceneForLayout(rootContainer, R.layout.transition_file, this);
+        image = (ImageView)findViewById(R.id.onView);
+
         toggleButton = (Button) findViewById(R.id.toggleButton);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickSound.start();
-                sceneOn.enter();
+                if (image.getVisibility() == View.INVISIBLE){
+                    image.setVisibility(View.VISIBLE);
+                } else {
+                    image.setVisibility(View.INVISIBLE);
+                }
 
             }
         });
 
-
-    }
-
-    public void goToOnScene(View view){
-        clickSound = MediaPlayer.create(this, R.raw.button_click);
-        TransitionManager.go(sceneOn);
-        clickSound.start();
-    }
-
-    public void goToOffScene(View view){
-        clickSound = MediaPlayer.create(this, R.raw.button_click);
-        TransitionManager.go(sceneOff);
-        clickSound.start();
     }
 
     @Override

@@ -1,44 +1,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/light_off"
+    android:background="@drawable/off"
     android:weightSum="1"
     android:id="@+id/rootContainer">
 
+
     <ToggleButton
-        android:layout_width="256dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New ToggleButton"
         android:id="@+id/toggleButton"
-        android:layout_gravity="center_horizontal"
         android:background="@drawable/toggle_switch"
-        android:textOff=""
         android:textOn=""
-        android:onClick="goToOnScene"
-        android:layout_weight="0.07"
-        android:layout_centerVertical="true"
+        android:textOff=""
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-
-
     <ImageView
-        android:src="@drawable/light_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/off_view"
+        android:id="@+id/onView"
+        android:background="@drawable/on"
         android:visibility="invisible"
-        />
-
-    <ImageView
-        android:src="@drawable/light_on"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/on_view"
-        android:visibility="invisible"
-
-        />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
