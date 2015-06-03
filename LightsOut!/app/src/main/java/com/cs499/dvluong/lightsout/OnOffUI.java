@@ -67,7 +67,7 @@ public class OnOffUI extends Activity {
             DefaultHttpClient client = new DefaultHttpClient();
 
             // This should be http://c14071c2.ngrok.io/off, but they are reversed
-            HttpGet request = new HttpGet("http://c14071c2.ngrok.io/on");
+            HttpGet request = new HttpGet("http://lightsoutbruh.ngrok.io/on");
 
             HttpResponse response = client.execute(request);
         } catch (ClientProtocolException e) {
@@ -82,7 +82,7 @@ public class OnOffUI extends Activity {
             DefaultHttpClient client = new DefaultHttpClient();
 
             // This should be http://c14071c2.ngrok.io/on, but they are reversed
-            HttpGet request = new HttpGet("http://c14071c2.ngrok.io/off");
+            HttpGet request = new HttpGet("http://lightsoutbruh.ngrok.io/off");
 
             HttpResponse response = client.execute(request);
         } catch (ClientProtocolException e) {
